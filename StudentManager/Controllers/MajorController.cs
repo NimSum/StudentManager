@@ -52,8 +52,8 @@ namespace StudentManager.Controllers
         [Route("/[controller]/Delete")]
         public async Task<IActionResult> Delete(int id)
         {
-            var employee = await _context.Majors.FindAsync(id);
-            _context.Majors.Remove(employee);
+            var major = await _context.Majors.FindAsync(id);
+            _context.Majors.Remove(major);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
