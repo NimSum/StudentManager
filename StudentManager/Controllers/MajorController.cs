@@ -20,9 +20,17 @@ namespace StudentManager.Controllers
         }
 
         // GET: /<controller>/
-        public IActionResult Index()
+        public async Task<IActionResult> IndexAsync()
         {
-            return View();
+            return View(await _context.Majors.ToListAsync());
+        }
+
+        public IActionResult AddOrEditMajor(int id=0)
+        {
+            if (id == 0)
+                return View(new Major());
+            else
+                return View(_context.Majors.Find(id));
         }
     }
 }
