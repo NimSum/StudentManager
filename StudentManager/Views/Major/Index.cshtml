@@ -38,6 +38,9 @@
                 @Html.DisplayFor(modelItem => item.Details)
             </td>
             <td>
+                <a asp-controller="Student" asp-action="Index" asp-route-majorId="@item.MajorId">Show Students</a>
+            </td>
+            <td>
                 <a asp-action="AddOrEditMajor" asp-route-id="@item.MajorId">Edit</a>
                 <a asp-action="Delete" asp-route-id="@item.MajorId" class="text-danger ml-1" onclick="return confirm('Are you sure to delete this major?')">Delete</a>
             </td>
