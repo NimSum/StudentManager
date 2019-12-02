@@ -32,5 +32,21 @@ namespace StudentManager.Controllers
             else
                 return View(_context.Majors.Find(id));
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddOrEdit([Bind("MajorId,Name,Details")] Major major)
+        {
+            if (ModelState.IsValid)
+            {
+                if (major.MajorId == 0)
+                    _context.Add(major);
+                else
+                    _context.Update(major);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(major);
+        }
     }
 }
