@@ -19,9 +19,13 @@ namespace StudentManager.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> IndexAsync()
+        public async Task<IActionResult> IndexAsync(int majorId = 0)
         {
-            return View(await _context.Students.ToListAsync());
+            if (majorId == 0)
+                return View(await _context.Students.ToListAsync());
+            var studentsByMajor = _context.Students
+                         .Where(s => s.MajorRefId == majorId);
+            return View(await studentsByMajor.ToListAsync());
         }
 
         public IActionResult AddOrEditStudent(int id = 0)
