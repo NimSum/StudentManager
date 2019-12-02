@@ -48,5 +48,14 @@ namespace StudentManager.Controllers
             }
             return View(major);
         }
+
+        [Route("/[controller]/Delete")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var employee = await _context.Majors.FindAsync(id);
+            _context.Majors.Remove(employee);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
